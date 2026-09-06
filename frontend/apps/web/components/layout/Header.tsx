@@ -32,8 +32,6 @@ export function Header() {
     }
   }
 
-  const topCategories = categories?.slice(0, 8) ?? [];
-
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       {/* Top bar */}
