@@ -1,4 +1,4 @@
-export const APP_NAME = 'Zavora';
+export const APP_NAME = 'Majo';
 export const APP_DESCRIPTION = 'Multi-vendor marketplace';
 
 export const PAGINATION_PAGE_SIZE = 24;

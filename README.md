@@ -1,11 +1,11 @@
-# Zavora Marketplace
+# Majo Marketplace
 
 A full-stack multi-vendor e-commerce marketplace with a Django REST API backend and a Next.js + React Native frontend monorepo.
 
 ## Project Structure
 
 ```
-Zavora/
+Majo/
 ├── backend/        # Django REST Framework API
 └── frontend/       # Turborepo monorepo
     ├── apps/
