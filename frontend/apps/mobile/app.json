@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Majo",
-    "slug": "majo",
+    "name": "Zavora",
+    "slug": "zavora",
     "version": "1.0.0",
-    "scheme": "majo",
+    "scheme": "zavora",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.majo.app"
+      "bundleIdentifier": "com.zavora.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.majo.app"
+      "package": "com.zavora.app"
     },
     "plugins": [
       "expo-router",

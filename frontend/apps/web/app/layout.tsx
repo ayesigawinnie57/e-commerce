@@ -6,7 +6,7 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: { default: 'Majo', template: '%s | Majo' },
+  title: { default: 'Zavora', template: '%s | Zavora' },
   description: 'Multi-vendor marketplace — shop everything you need',
 };
 

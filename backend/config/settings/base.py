@@ -177,7 +177,7 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 
 # drf-spectacular
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Majo Marketplace API",
+    "TITLE": "Zavora Marketplace API",
     "DESCRIPTION": "Multi-vendor e-commerce marketplace API for web and mobile clients.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,

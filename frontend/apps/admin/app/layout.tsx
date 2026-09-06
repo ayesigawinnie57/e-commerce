@@ -7,7 +7,7 @@ import { AdminProviders } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: { default: 'Majo Admin', template: '%s | Majo Admin' },
+  title: { default: 'Zavora Admin', template: '%s | Zavora Admin' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
