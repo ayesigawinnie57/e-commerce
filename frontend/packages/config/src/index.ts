@@ -28,4 +28,11 @@ export const ROUTES = {
   deals: '/deals',
   brands: '/brands',
   brand: (slug: string) => `/brands/${slug}`,
+  healthBeauty: '/categories/health-beauty',
+  fashion: '/categories/fashion',
+  phonesTablets: '/categories/phones-tablets',
+  electronics: '/categories/electronics',
+  homeAppliances: '/categories/home-appliances',
+  computing: '/categories/computing',
+  babyProducts: '/categories/baby-products',
 } as const;

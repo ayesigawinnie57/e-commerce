@@ -45,15 +45,6 @@ export function Header() {
       {/* Main header */}
       <div className="border-b border-slate-200">
         <div className="container-page flex h-16 items-center gap-4">
-          {/* Mobile: hamburger */}
-          <button
-            onClick={toggleMobileMenu}
-            className="rounded-lg p-2 hover:bg-slate-100 md:hidden"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-
           {/* Logo */}
           <Link
             href={ROUTES.home}
@@ -117,6 +108,15 @@ export function Header() {
               )}
             </button>
 
+            {/* Mobile: hamburger — right side */}
+            <button
+              onClick={toggleMobileMenu}
+              className="rounded-lg p-2 hover:bg-slate-100 md:hidden"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+
             {/* Account */}
             {user ? (
               <Link
@@ -160,20 +160,28 @@ export function Header() {
               All Categories
               <ChevronDown className="h-3 w-3" />
             </button>
-            {catMenuOpen && topCategories.length > 0 && (
+            {catMenuOpen && (
               <div
                 onMouseEnter={() => setCatMenuOpen(true)}
                 onMouseLeave={() => setCatMenuOpen(false)}
                 className="absolute left-0 top-full z-50 w-56 rounded-xl border border-slate-200 bg-white py-2 shadow-lg"
               >
-                {topCategories.map((cat) => (
+                {[
+                  { label: 'Health & Beauty', href: ROUTES.healthBeauty },
+                  { label: 'Fashion', href: ROUTES.fashion },
+                  { label: 'Phones & Tablets', href: ROUTES.phonesTablets },
+                  { label: 'Electronics', href: ROUTES.electronics },
+                  { label: 'Home Appliances', href: ROUTES.homeAppliances },
+                  { label: 'Computing', href: ROUTES.computing },
+                  { label: 'Baby Products', href: ROUTES.babyProducts },
+                ].map(({ label, href }) => (
                   <Link
-                    key={cat.id}
-                    href={ROUTES.category(cat.slug)}
+                    key={href}
+                    href={href}
                     className="block px-4 py-2 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600"
                     onClick={() => setCatMenuOpen(false)}
                   >
-                    {cat.name}
+                    {label}
                   </Link>
                 ))}
                 <div className="mx-4 my-1 border-t border-slate-100" />
@@ -189,22 +197,25 @@ export function Header() {
           </div>
 
           {/* Quick category links */}
-          {topCategories.slice(0, 6).map((cat) => (
+          {[
+            { label: 'Health & Beauty', href: ROUTES.healthBeauty },
+            { label: 'Fashion', href: ROUTES.fashion },
+            { label: 'Phones & Tablets', href: ROUTES.phonesTablets },
+            { label: 'Electronics', href: ROUTES.electronics },
+            { label: 'Home Appliances', href: ROUTES.homeAppliances },
+            { label: 'Computing', href: ROUTES.computing },
+            { label: 'Baby Products', href: ROUTES.babyProducts },
+          ].map(({ label, href }) => (
             <Link
-              key={cat.id}
-              href={ROUTES.category(cat.slug)}
+              key={href}
+              href={href}
               className="rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-orange-500 whitespace-nowrap"
             >
-              {cat.name}
+              {label}
             </Link>
           ))}
 
-          <Link
-            href={ROUTES.deals}
-            className="ml-auto rounded-lg px-3 py-2 text-sm font-semibold text-orange-500 hover:bg-orange-50"
-          >
-            🔥 Deals
-          </Link>
+
         </div>
       </div>
 
@@ -224,31 +235,51 @@ export function Header() {
         </form>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — right side drawer */}
       {isMobileMenuOpen && (
-        <nav className="border-b border-slate-200 bg-white px-4 py-3 md:hidden">
-          <ul className="flex flex-col gap-1">
-            {[
-              { href: ROUTES.home, label: 'Home' },
-              { href: '/categories', label: 'Categories' },
-              { href: ROUTES.deals, label: '🔥 Deals' },
-              { href: ROUTES.orders, label: 'My Orders' },
-              { href: ROUTES.wishlist, label: 'Wishlist' },
-              { href: ROUTES.sellerRegister, label: 'Become a Seller' },
-              ...(!user ? [{ href: ROUTES.login, label: 'Sign In' }, { href: ROUTES.register, label: 'Register' }] : [{ href: ROUTES.profile, label: 'My Account' }]),
-            ].map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  onClick={closeMobileMenu}
-                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-black/40 md:hidden"
+            onClick={closeMobileMenu}
+          />
+          {/* Drawer */}
+          <nav className="fixed right-0 top-0 z-50 h-full w-72 overflow-y-auto bg-white shadow-2xl md:hidden">
+            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-4">
+              <span className="text-base font-extrabold text-orange-500">{APP_NAME}</span>
+              <button onClick={closeMobileMenu} className="rounded-lg p-1.5 hover:bg-slate-100">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <ul className="flex flex-col gap-0.5 p-3">
+              {[
+                { href: ROUTES.home, label: 'Home' },
+                { href: '/categories', label: 'All Categories' },
+                { href: ROUTES.healthBeauty, label: 'Health & Beauty' },
+                { href: ROUTES.fashion, label: 'Fashion' },
+                { href: ROUTES.phonesTablets, label: 'Phones & Tablets' },
+                { href: ROUTES.electronics, label: 'Electronics' },
+                { href: ROUTES.homeAppliances, label: 'Home Appliances' },
+                { href: ROUTES.computing, label: 'Computing' },
+                { href: ROUTES.babyProducts, label: 'Baby Products' },
+                { href: ROUTES.orders, label: 'My Orders' },
+                { href: ROUTES.wishlist, label: 'Wishlist' },
+                { href: ROUTES.sellerRegister, label: 'Become a Seller' },
+                ...(!user ? [{ href: ROUTES.login, label: 'Sign In' }, { href: ROUTES.register, label: 'Register' }] : [{ href: ROUTES.profile, label: 'My Account' }]),
+              ].map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    onClick={closeMobileMenu}
+                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-500"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </>
       )}
     </header>
   );

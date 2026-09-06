@@ -1,60 +1,71 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { ROUTES } from '@zavora/config';
-import { Skeleton } from '@/components/ui';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { useCategories } from '@/hooks/useQueries';
+
+const CATEGORIES = [
+  {
+    label: 'Health & Beauty',
+    href: ROUTES.healthBeauty,
+    image: 'https://address-restaurant2.odoo.com/web/image/2113-67ed1a66/pppp.webp',
+  },
+  {
+    label: 'Fashion',
+    href: ROUTES.fashion,
+    image: 'https://address-restaurant2.odoo.com/web/image/2121-09657faa/Fashion.webp',
+  },
+  {
+    label: 'Phones & Tablets',
+    href: ROUTES.phonesTablets,
+    image: 'https://address-restaurant2.odoo.com/web/image/2131-4951a7e3/phone%20%26%20tablets.webp',
+  },
+  {
+    label: 'Electronics',
+    href: ROUTES.electronics,
+    image: 'https://address-restaurant2.odoo.com/web/image/2133-adfefa14/eletronics.webp',
+  },
+  {
+    label: 'Home Appliances',
+    href: ROUTES.homeAppliances,
+    image: 'https://address-restaurant2.odoo.com/web/image/2117-c7221b29/appl.webp',
+  },
+  {
+    label: 'Computing',
+    href: ROUTES.computing,
+    image: 'https://address-restaurant2.odoo.com/web/image/2137-0ad028ba/Computing.webp',
+  },
+  {
+    label: 'Baby Products',
+    href: ROUTES.babyProducts,
+    image: 'https://address-restaurant2.odoo.com/web/image/2139-17f3d2c5/babies.webp',
+  },
+];
 
 export function CategorySection() {
-  const { data: categories, isLoading, isError, refetch } = useCategories();
-
   return (
     <section>
       <SectionHeader title="Shop by Category" viewAllHref="/categories" />
-
-      {isLoading ? (
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="flex flex-col items-center gap-2">
-              <Skeleton className="h-16 w-16 rounded-full" />
-              <Skeleton className="h-3 w-14 rounded" />
+      <div className="grid grid-cols-4 gap-4 sm:grid-cols-5 md:grid-cols-7">
+        {CATEGORIES.map(({ label, href, image }) => (
+          <Link
+            key={href}
+            href={href}
+            className="group flex flex-col items-center gap-2 text-center"
+          >
+            <div className="h-16 w-16 overflow-hidden rounded-full border-2 border-slate-100 bg-slate-50 transition-all group-hover:border-orange-400 group-hover:shadow-md sm:h-20 sm:w-20">
+              <img
+                src={image}
+                alt={label}
+                className="h-full w-full object-cover"
+              />
             </div>
-          ))}
-        </div>
-      ) : isError ? (
-        <div className="flex flex-col items-center gap-2 py-8 text-center">
-          <p className="text-sm text-slate-500">Unable to load categories.</p>
-          <button onClick={() => refetch()} className="text-sm font-medium text-orange-500 hover:underline">
-            Try Again
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
-          {categories?.map((cat) => (
-            <Link
-              key={cat.id}
-              href={ROUTES.category(cat.slug)}
-              className="group flex flex-col items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 text-center transition-all hover:border-orange-300 hover:shadow-md"
-            >
-              <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-orange-50">
-                {cat.image ? (
-                  <Image src={cat.image} alt={cat.name} fill className="object-cover" />
-                ) : (
-                  <span className="text-2xl">🏷️</span>
-                )}
-              </div>
-              <span className="text-xs font-medium text-slate-700 group-hover:text-orange-500 transition-colors line-clamp-2">
-                {cat.name}
-              </span>
-              {cat.productCount !== undefined && (
-                <span className="text-[10px] text-slate-400">{cat.productCount} items</span>
-              )}
-            </Link>
-          ))}
-        </div>
-      )}
+            <span className="text-xs font-medium text-slate-700 group-hover:text-orange-500 transition-colors line-clamp-2">
+              {label}
+            </span>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

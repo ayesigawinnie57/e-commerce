@@ -45,7 +45,7 @@ export function HomePageClient() {
         <PromoBanner banner={promoBanner} />
 
         <ProductSection
-          title="🔥 Trending Now"
+          title="Trending Now"
           products={trendingProducts}
           isLoading={!homepage && trendingLoading}
           isError={!homepage && trendingError}
