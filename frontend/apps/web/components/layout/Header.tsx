@@ -10,14 +10,13 @@ import {
 import { useUIStore } from '@/store/ui';
 import { useAuthStore } from '@/store/auth';
 import { APP_NAME, ROUTES } from '@zavora/config';
-import { useCart, useCategories } from '@/hooks/useQueries';
+import { useCart } from '@/hooks/useQueries';
 
 export function Header() {
   const router = useRouter();
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu, openCart } = useUIStore();
   const { user } = useAuthStore();
   const { data: cart } = useCart();
-  const { data: categories } = useCategories();
   const [searchQuery, setSearchQuery] = useState('');
   const [catMenuOpen, setCatMenuOpen] = useState(false);
   const catRef = useRef<HTMLDivElement>(null);
